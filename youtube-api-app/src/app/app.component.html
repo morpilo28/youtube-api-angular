@@ -1,4 +1,20 @@
-<app-playlist></app-playlist>
-<div></div>
+<aside>
+    <app-playlist (videoId)="onShowVideo($event)" *ngFor='let video of playlist' [video]='video'></app-playlist>
+</aside>
 
+
+<div class="search">
+    <app-search (playlist)="onSearchGetPlaylist($event)"></app-search>
+</div>
+<main class="player">
+    <app-player [videoId]='videoId' [playlist]='playlist'></app-player>
+</main>
+
+<!-- 
+
+
+ -->
+<footer>
+
+</footer>
 <router-outlet></router-outlet>

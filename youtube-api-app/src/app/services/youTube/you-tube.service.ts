@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { YouTubeList } from 'src/app/models/you-tube-list';
+import { YouTubeListModel } from 'src/app/models/you-tube-list';
+import { environment } from 'src/environments/environment';
+import { YouTubeUrlBuilder } from 'src/app/builder/youtubeUrlBuilder';
 
 @Injectable({
   providedIn: 'root'
 })
 export class YouTubeService {
-  apiKey: string = 'AIzaSyAEusu_4PwMPkU9F4E10B83tk08DycNPBU';
 
-  constructor(public http: HttpClient) { }
+  constructor(public httpClient: HttpClient) { }
 
-  getVideosForChanel(query, maxResults): Observable<YouTubeList> {
-    let url = 'https://www.googleapis.com/youtube/v3/search?key=' + this.apiKey + '&q=' + query + '&part=snippet&type=video,id&maxResults=' + maxResults
-
-    return this.http.get<YouTubeList>(url);
+  getVideosForPlaylist(query): Observable<YouTubeListModel> {
+    const youTubeUrl = new YouTubeUrlBuilder(environment.apiKey, environment.baseUrl);
+    youTubeUrl.addPart('snippet');
+    youTubeUrl.addQueryForSearch(query);
+    youTubeUrl.addType('video');
+  
+    return this.httpClient.get<YouTubeListModel>(youTubeUrl.toString()); 
   }
 }

@@ -1,0 +1,5 @@
+<div [title]='video.snippet.description' (click)='onPickedVideo(video.id.videoId)'>
+    <h3>{{video.snippet.title}}</h3>
+    <img [src]="video.snippet.thumbnails.default.url" />
+</div>
+<hr>

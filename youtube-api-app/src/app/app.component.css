@@ -1,0 +1,21 @@
+aside {
+    background-color: aqua;
+    width: 30%;
+    float: left;
+    min-height: 740px;
+}
+
+main, .search {
+    width: 70%;
+    float: right;
+}
+
+.search {
+    background-color: greenyellow;
+    min-height: 100px;
+}
+
+.player {
+    background-color: pink;
+    min-height: 640px;
+}

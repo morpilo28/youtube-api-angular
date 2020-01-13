@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  serverUri: 'http://localhost:4200', // only when going to local server
+  baseUrl: 'https://www.googleapis.com/youtube/v3/search',
+  apiKey: 'AIzaSyAEusu_4PwMPkU9F4E10B83tk08DycNPBU'
 };
 
 /*

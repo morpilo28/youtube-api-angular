@@ -4,13 +4,17 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PlaylistComponent } from './components/playlist/playlist/playlist.component';
+import { PlaylistComponent } from './components/playlist/playlist.component';
+import { PlayerComponent } from './components/player/player.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PlaylistComponent
+    PlaylistComponent,
+    PlayerComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
