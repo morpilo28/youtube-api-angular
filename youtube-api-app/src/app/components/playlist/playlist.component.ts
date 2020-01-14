@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { YouTubeItem, YouTubeId } from 'src/app/models/you-tube-list';
+import { YouTubeItem } from 'src/app/models/you-tube-list';
 
 @Component({
   selector: 'app-playlist',

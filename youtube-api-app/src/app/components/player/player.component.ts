@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Sanitizer } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { YouTubeItem } from 'src/app/models/you-tube-list';
 
@@ -22,14 +22,6 @@ export class PlayerComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+  
   }
-
-  onDisLike(videoId){
-    console.log('dislike: ' + videoId)
-  }
-
-  onLike(videoId){
-    console.log('like: ' + videoId)
-  }
-
 }

@@ -2,10 +2,6 @@
     <iframe class='playerBox' width="1280" height="720" [src]="url" frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
     </iframe>
-    <div>
-        <button (click)='onLike(videoId)'>Like</button>
-        <button (click)='onDisLike(videoId)'>DisLike</button>
-    </div>
     <div class="videoDetails">
         <div *ngFor='let video of playlist'>
             <h2 *ngIf='video.id.videoId === videoId'>{{video.snippet.title}}</h2>
