@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   serverUri: 'http://localhost:4200', // only when going to local server
-  baseUrl: 'https://www.googleapis.com/youtube/v3/search',
+  baseUrl: 'http://localhost:4200'/* 'https://www.googleapis.com/youtube/v3/search' */,
   apiKey: 'AIzaSyAEusu_4PwMPkU9F4E10B83tk08DycNPBU'
 };
 
