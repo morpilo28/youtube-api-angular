@@ -9,7 +9,7 @@ import {User} from "../../models/user";
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
-  private user: User = {userName: '', password: ''};
+  private user: User = {userName: '', password: '', userId: null};
   note: string = '';
 
   constructor(private router: Router, private membersAreaService: MembersAreaService) {
@@ -21,7 +21,6 @@ export class LoginPageComponent implements OnInit {
 
   onSubmitForm() {
     this.membersAreaService.validateUser(this.user).subscribe(isLoginSuccessful => {
-      console.log(isLoginSuccessful);
       if (isLoginSuccessful) {
         this.router.navigate(['/youtube-search']);
       } else {

@@ -11,6 +11,7 @@ import { SearchComponent } from './components/search-page/search/search.componen
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { SearchPageComponent } from './components/search-page/search-page.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { SearchPageComponent } from './components/search-page/search-page.compon
     SearchComponent,
     HomePageComponent,
     LoginPageComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
