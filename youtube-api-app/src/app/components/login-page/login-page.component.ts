@@ -21,12 +21,17 @@ export class LoginPageComponent implements OnInit {
 
   onSubmitForm() {
     this.usersService.userValidation(this.user).subscribe(
-      userLogged => { this.setAndRoute(userLogged, true, '/youtube-search'); },
+      userLogged => {
+        debugger
+        window.localStorage.setItem('user', JSON.stringify(userLogged));
+        this.setAndRoute(userLogged, true, '/youtube-search');
+      },
       err => {
         console.log(err);
         this.note = `user not found`;
         this.user.userName = '';
         this.user.password = '';
+        window.localStorage.clear();
         this.setAndRoute({ userId: null, userName: '', password: '' }, false, '/login');
       });
   }

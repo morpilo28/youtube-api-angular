@@ -141,8 +141,12 @@ app.post('/login', function (req, res) {
         if (e) {
             return res.status(400).send('no user has been found');
         } else {
+            const userToClient = {
+                userId: user.id,
+                userName: user.userName
+            }
 
-            return res.send(user);
+            return res.send(userToClient);
         }
     })
 });

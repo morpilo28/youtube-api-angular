@@ -1,5 +1,6 @@
 <a [routerLink]="['/']">Home | </a>
 <a [routerLink]="['/register']">Register | </a>
-<a [routerLink]="['/login']">Login</a>
+<a [routerLink]="['/login']">Login | </a>
+<a [routerLink]="['/login']" (click)='onLogout()'>Logout</a>
 <br><br>
 <router-outlet></router-outlet>

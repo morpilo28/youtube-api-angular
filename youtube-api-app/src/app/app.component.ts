@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MembersAreaService } from './services/members-area/members-area.service';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +8,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   
-  constructor() { }
+  constructor(private membersAreaService:MembersAreaService) { }
 
   ngOnInit() {
+    const userFromLocalStorage = JSON.parse(window.localStorage.getItem('user'));
+    if(userFromLocalStorage){
+      this.membersAreaService.setIsUserLogged(true);
+      this.membersAreaService.setCurrentUser(userFromLocalStorage);
+    }else{
+      this.membersAreaService.setIsUserLogged(false);
+    }
+  }
 
+  onLogout(){
+    window.localStorage.clear();
   }
 
 }
