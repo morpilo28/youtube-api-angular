@@ -3,14 +3,65 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const app = express();
-
-// const vacationBl = require('./routing/vacations-bl');
 const usersBl = require('./routing/users-bl');
 const PORT = 3201;
 const cors = require('cors');
 // const SECRET_KEY_FOR_JWT = '687d6f87sd6f87sd6f78sd6f87sd';
 app.use(bodyParser.json());
 app.use(cors());
+
+
+app.get('/user', (req, res) => {
+    usersBl.getUsers((e, d) => {
+        if (e) {
+            return res.status(400).send('no users have been found');
+        } else {
+            return res.send(d);
+        }
+    })
+})
+
+app.post('/login', function (req, res) {
+    const userToValidate = {
+        userName: req.body.userName,
+        password: req.body.password,
+    }
+    usersBl.validateUser(userToValidate, (e, user) => {
+        if (e) {
+            return res.status(400).send('no user has been found');
+        } else {
+            const userToClient = {
+                userId: user.id,
+                userName: user.userName
+            }
+
+            return res.send(userToClient);
+        }
+    })
+});
+
+app.post('/register', function (req, res) {
+    const userToAdd = req.body;
+    usersBl.isUserNameAlreadyExist(userToAdd, (e) => {
+        if (e) {
+            res.status(400).send('user name taken. please select a different name');
+        } else {
+            usersBl.registerUser(userToAdd, (e) => {
+                if (e) {
+                    return res.status(500).send();
+                } else {
+                    return res.send();
+                }
+            })
+        }
+    })
+});
+
+app.listen(process.env.PORT || PORT, () =>
+    console.log(`Example app listening on port ${process.env.PORT || PORT}!`),
+);
+
+
 /* 
  app.use((req, res, next) => {
       console.log({
@@ -122,52 +173,3 @@ app.use(cors());
          }
      })
  }) */
-app.get('/user', (req, res) => {
-    usersBl.getUsers((e, d) => {
-        if (e) {
-            return res.status(400).send('no users have been found');
-        } else {
-            return res.send(d);
-        }
-    })
-})
-
-app.post('/login', function (req, res) {
-    const userToValidate = {
-        userName: req.body.userName,
-        password: req.body.password,
-    }
-    usersBl.validateUser(userToValidate, (e, user) => {
-        if (e) {
-            return res.status(400).send('no user has been found');
-        } else {
-            const userToClient = {
-                userId: user.id,
-                userName: user.userName
-            }
-
-            return res.send(userToClient);
-        }
-    })
-});
-
-app.post('/register', function (req, res) {
-    const userToAdd = req.body;
-    usersBl.isUserNameAlreadyExist(userToAdd, (e) => {
-        if (e) {
-            res.status(400).send('user name taken. please select a different name');
-        } else {
-            usersBl.registerUser(userToAdd, (e) => {
-                if (e) {
-                    return res.status(500).send();
-                } else {
-                    return res.send();
-                }
-            })
-        }
-    })
-});
-
-app.listen(process.env.PORT || PORT, () =>
-    console.log(`Example app listening on port ${process.env.PORT || PORT}!`),
-);
