@@ -22,7 +22,7 @@ export class PlaylistComponent implements OnInit {
 
   onPickedVideo(videoId: string) {
     this.currentUser = this.membersAreaService.getCurrentUser();
-    this.usersService.postUserAndVideoId(this.currentUser.userId,videoId);
+    this.usersService.addUserAndVideoId(this.currentUser.userId,videoId);
     this.videoId.emit(videoId);
   }
 

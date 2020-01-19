@@ -20,7 +20,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmitForm() {
-    this.usersService.userValidation(this.user).subscribe(
+    this.usersService.userLoginValidation(this.user).subscribe(
       userLogged => {
         debugger
         window.localStorage.setItem('user', JSON.stringify(userLogged));

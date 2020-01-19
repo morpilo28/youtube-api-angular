@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { YouTubeListModel } from "../../models/you-tube-list";
 import { environment } from "../../../environments/environment";
 import { UserModel } from "../../models/userModel";
 import { ViewingHistoryModel } from "../../models/viewing-history-model";
@@ -18,7 +17,7 @@ export class UsersService {
     this.id = 0;
   }
 
-  postUser(user): Observable<UserModel> {
+  registerUser(user): Observable<UserModel> {
     const userToAdd: UserModel = {
       userId: this.id++,
       userName: user.userName,
@@ -28,13 +27,10 @@ export class UsersService {
     /* .subscribe((res)=>{
       this.users = res;
     }); */
-    return this.httpClient.post<UserModel>(`${environment.serverUri}/register`, userToAdd).pipe(res=>{
-      console.log(res);
-      return res;
-        });
+    return this.httpClient.post<UserModel>(`${environment.serverUri}/register`, userToAdd);
   }
 
-  userValidation(user: UserModel): Observable <UserModel> {
+  userLoginValidation(user: UserModel): Observable <UserModel> {
     //return this.users;
     return this.httpClient.post<UserModel>(`${environment.serverUri}/login`, user);
   }
@@ -48,7 +44,7 @@ export class UsersService {
     // this.httpClient.get<User>('/user');
   }
 
-  postUserAndVideoId(userId, videoId) {
+  addUserAndVideoId(userId, videoId) {
     // this.httpClient.get<connectionTable>('/user');
     const objToAdd: ViewingHistoryModel = { userId: userId, videoId: videoId }
     this.viewingHistory.push(objToAdd);
