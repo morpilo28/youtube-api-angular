@@ -1,0 +1,8 @@
+
+<h2>Registration</h2>
+<p>{{note}}</p>
+<form id="'form">
+  <input [(ngModel)]="user.userName" placeholder="user name" name="userName">
+  <input [(ngModel)]="user.password" type='password' placeholder="password" name="password">
+  <button (click)='onSubmitForm()'>Register</button>
+</form>

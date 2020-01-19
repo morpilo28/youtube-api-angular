@@ -14,13 +14,13 @@ export class YouTubeService {
 
   getVideosForPlaylist(query): Observable<YouTubeListModel> {
    // fetch data from local data  
-    return this.httpClient.get<YouTubeListModel>(environment.baseUrl+"/assets/youTubeList.json"); 
+    return this.httpClient.get<YouTubeListModel>(environment.youtubeBaseUrl+"/assets/youTubeList.json"); 
   }
 
 
 /* 
   getVideosForPlaylist(query): Observable<YouTubeListModel> {
-    const youTubeUrl = new YouTubeUrlBuilder(environment.apiKey, environment.baseUrl);
+    const youTubeUrl = new YouTubeUrlBuilder(environment.apiKey, environment.youtubeBaseUrl);
     youTubeUrl.addPart('snippet');
     youTubeUrl.addQueryForSearch(query);
     youTubeUrl.addType('video');

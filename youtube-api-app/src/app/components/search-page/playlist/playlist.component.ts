@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {YouTubeItem} from 'src/app/models/you-tube-list';
 import {MembersAreaService} from "../../../services/members-area/members-area.service";
-import {User} from "../../../models/user";
+import {UserModel} from "../../../models/userModel";
 import {UsersService} from "../../../services/users/users.service";
 
 @Component({
@@ -12,7 +12,7 @@ import {UsersService} from "../../../services/users/users.service";
 export class PlaylistComponent implements OnInit {
   @Input() video: YouTubeItem;
   @Output() videoId: EventEmitter<string> = new EventEmitter<string>();
-  currentUser: User;
+  currentUser: UserModel;
 
   constructor(private membersAreaService: MembersAreaService, private  usersService:UsersService) {
   }
