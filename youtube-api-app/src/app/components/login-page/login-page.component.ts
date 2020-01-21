@@ -22,7 +22,6 @@ export class LoginPageComponent implements OnInit {
   onSubmitForm() {
     this.usersService.userLoginValidation(this.user).subscribe(
       userLogged => {
-        debugger
         window.localStorage.setItem('user', JSON.stringify(userLogged));
         this.setAndRoute(userLogged, true, '/youtube-search');
       },

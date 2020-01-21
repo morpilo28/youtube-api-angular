@@ -18,11 +18,29 @@ export class PlaylistComponent implements OnInit {
   }
 
   ngOnInit() {
+      //TODO:
+    /* 
+      debugger
+    this.playlist = this.youTubeService.getPlaylist();
+    this.currentUser = this.membersAreaService.getCurrentUser();
+    // get top 5 watched videos string
+    this.usersService.getIdsOfMostWatchedVideosByUser(this.currentUser.userId).subscribe(top5VideosStr => {
+      console.log(top5VideosStr);
+      debugger
+      // show top 5 videos on playlist
+      this.youTubeService.getMostWatchedVideosByUser(top5VideosStr.videosIdStr).subscribe(top5List => {
+        debugger
+        console.log(top5List);
+        this.youTubeService.setPlaylist(top5List.items);//perhaps not needed
+        this.playlist = this.youTubeService.getPlaylist();
+      });
+    });
+    */
   }
 
   onPickedVideo(videoId: string) {
     this.currentUser = this.membersAreaService.getCurrentUser();
-    this.usersService.addUserAndVideoId(this.currentUser.userId,videoId);
+    this.usersService.addUserAndVideoId(this.currentUser.userId,videoId).subscribe(res=>console.log(res));
     this.videoId.emit(videoId);
   }
 

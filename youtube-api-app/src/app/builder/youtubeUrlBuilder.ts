@@ -22,6 +22,10 @@ export class YouTubeUrlBuilder {
         this.urlParams['type'] = typeValue;
     }
 
+    addVideosId(videosId){
+        this.urlParams['id'] = videosId;
+    }
+
     toString(): string {
         const queryString = Object.keys(this.urlParams).map((key) => {
             return key + '=' + this.urlParams[key];

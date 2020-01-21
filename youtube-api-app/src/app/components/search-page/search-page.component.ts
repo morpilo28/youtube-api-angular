@@ -7,19 +7,19 @@ import { YouTubeItem } from 'src/app/models/you-tube-list';
   styleUrls: ['./search-page.component.css']
 })
 export class SearchPageComponent implements OnInit {
-    private playlist: YouTubeItem[] = []
-    private videoId: string;
-    constructor() { }
-  
-    ngOnInit() {
-  
-    }
-  
-    onSearchGetPlaylist(playlist: YouTubeItem[]) {
-      this.playlist = playlist;
-    }
-  
-    onShowVideo(videoId: string) {
-      this.videoId = videoId;
-    }
+  private playlist: YouTubeItem[] = []
+  private videoId: string;
+  constructor() { }
+
+  ngOnInit() {
+
+  }
+
+  onSearchGetPlaylist(playlist: YouTubeItem[]) {
+    this.playlist = playlist;
+  }
+
+  onShowVideo(videoId: string) {
+    this.videoId = videoId;
+  }
 }

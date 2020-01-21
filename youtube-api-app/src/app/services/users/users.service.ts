@@ -11,7 +11,6 @@ import { ViewingHistoryModel } from "../../models/viewing-history-model";
 export class UsersService {
   private users: UserModel[] = [];
   private id: number;
-  private viewingHistory: ViewingHistoryModel[] = [];
 
   constructor(private httpClient: HttpClient) {
     this.id = 0;
@@ -19,19 +18,15 @@ export class UsersService {
 
   registerUser(user): Observable<UserModel> {
     const userToAdd: UserModel = {
-      userId: this.id++,
+      userId: null,
       userName: user.userName,
       password: user.password
     }
-    // this.users.push(userToAdd);
-    /* .subscribe((res)=>{
-      this.users = res;
-    }); */
+
     return this.httpClient.post<UserModel>(`${environment.serverUri}/register`, userToAdd);
   }
 
-  userLoginValidation(user: UserModel): Observable <UserModel> {
-    //return this.users;
+  userLoginValidation(user: UserModel): Observable<UserModel> {
     return this.httpClient.post<UserModel>(`${environment.serverUri}/login`, user);
   }
 
@@ -44,14 +39,13 @@ export class UsersService {
     // this.httpClient.get<User>('/user');
   }
 
-  addUserAndVideoId(userId, videoId) {
-    // this.httpClient.get<connectionTable>('/user');
-    const objToAdd: ViewingHistoryModel = { userId: userId, videoId: videoId }
-    this.viewingHistory.push(objToAdd);
-    console.log(this.viewingHistory);
+  addUserAndVideoId(userId: number, videoId: string): Observable<ViewingHistoryModel> {
+    const objToAdd: ViewingHistoryModel = { userId: userId, videoId: videoId };
+    return this.httpClient.post<ViewingHistoryModel>(`${environment.serverUri}/watch-history`, objToAdd);
   }
+/* 
+  getTop5VideosId(userId): Observable<any> {
+    return this.httpClient.get<any>(`${environment.serverUri}/top5Videos/${userId}`);
+  } */
 
 }
-
-
-

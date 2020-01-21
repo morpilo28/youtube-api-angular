@@ -1,13 +1,14 @@
 //TODO: make all strings to lower case;
 
 const dal = require('../dal');
-const table = 'user';
+const watchHistoryTable = 'watch_history';
+const userTable = 'user';
 const userModel = require('../models/userModel');
 
 function isUserNameAlreadyExist(registeredUser, callback) {
     //checking if a userName already exist in the db
     registeredUser = new userModel.User(null, registeredUser.userName, registeredUser.password);
-    dal.readAll(`select * from ${table} `, (e, allUsers) => {
+    dal.readAll(`select * from ${userTable} `, (e, allUsers) => {
         allUsers = createUserTypeObj(allUsers);
         if (e) {
             callback(e);
@@ -25,7 +26,7 @@ function isUserNameAlreadyExist(registeredUser, callback) {
 function registerUser(userToAdd, callback) {
     userToAdd = new userModel.User(null, userToAdd.userName, userToAdd.password);
     const { userName, password } = userToAdd;
-    dal.createOne(`insert into ${table} (userName, password) values ('${userName}', '${password}');`, `select * from ${table} where userName like '${userName}'`, (e, data) => {
+    dal.createOne(`insert into ${userTable} (userName, password) values ('${userName}', '${password}');`, `select * from ${userTable} where userName like '${userName}'`, (e, data) => {
         if (e) {
             callback(e);
         } else {
@@ -36,7 +37,7 @@ function registerUser(userToAdd, callback) {
 
 function validateUser(userToValidate, callback) {
     //checking if a user exist in the db
-    dal.readAll(`select * from ${table}`, (e, allUsers) => {
+    dal.readAll(`select * from ${userTable}`, (e, allUsers) => {
         allUsers = createUserTypeObj(allUsers);
         if (e) {
             callback(e);
@@ -60,19 +61,54 @@ function createUserTypeObj(allUsers) {
     return allUsers;
 }
 
-function getUsers(callback){
-    dal.readAll(`select * from ${table}`,(e,d)=>{
+function getUsers(callback) {
+    dal.readAll(`select * from ${userTable}`, (e, d) => {
+        if (e) {
+            callback(e);
+        } else {
+            callback(null, d);
+        }
+    })
+}
+
+function addToWatchList(objToAdd, callback) {
+    console.log(objToAdd);
+    dal.createOne(`insert into ${watchHistoryTable} (userId, videoId) values (${objToAdd.userId}, '${objToAdd.videoId}');`, `select * from ${watchHistoryTable} where id = (select max(id) from ${watchHistoryTable})`, (e, data) => {
+        if (e) {
+            callback(e);
+        } else {
+            callback(null, data);
+        }
+    })
+}
+
+/* function getUserTop5Videos(userId, callback) {
+    userId = Number(userId);
+    dal.readAll(`select videoId, count(videoId) as videoId_occurrence from ${watchHistoryTable} where userId = ${userId} group by videoId order by videoId_occurrence desc limit 5;`,(e,d)=>{
         if(e){
             callback(e);
         }else{
             callback(null,d);
         }
     })
-}
+} */
+
+/* 
+select videoId,
+count(videoId) as videoId_occurrence 
+from watch_history
+where userId = 4
+group by videoId 
+order by videoId_occurrence desc 
+limit 5
+
+*/
 
 module.exports = {
-    getUsers:getUsers,
+    getUsers: getUsers,
     registerUser: registerUser,
     validateUser: validateUser,
     isUserNameAlreadyExist: isUserNameAlreadyExist,
+    addToWatchList: addToWatchList,
+    /* getUserTop5Videos: getUserTop5Videos */
 }

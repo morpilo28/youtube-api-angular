@@ -10,7 +10,6 @@ const cors = require('cors');
 app.use(bodyParser.json());
 app.use(cors());
 
-
 app.get('/user', (req, res) => {
     usersBl.getUsers((e, d) => {
         if (e) {
@@ -57,12 +56,56 @@ app.post('/register', function (req, res) {
     })
 });
 
+app.post('/watch-history', function (req, res) {
+    const objToAdd = req.body;
+    usersBl.addToWatchList(objToAdd, (e, d) => {
+        if (e) {
+            return res.status(500).send(e);
+        } else {
+            return res.send(d);
+        }
+    })
+});
+
 app.listen(process.env.PORT || PORT, () =>
     console.log(`Example app listening on port ${process.env.PORT || PORT}!`),
 );
 
 
+
 /* 
+
+
+
+app.get('/top5Videos/:id', function (req, res) {
+    const userId = req.params.id;
+    usersBl.getUserTop5Videos(userId, (e, d) => {
+        if (e) {
+            res.status(500).send(e);
+        } else {
+            let videosIdStr = '';
+            for(let i = 0;i<d.length;i++){
+                videosIdStr+= `${d[i].videoId},`;
+            }
+            res.send({videosIdStr:videosIdStr});
+        }
+    })
+})
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+/*
  app.use((req, res, next) => {
       console.log({
           method: req.method,
@@ -72,7 +115,7 @@ app.listen(process.env.PORT || PORT, () =>
           params: req.params,
           query: req.query,
           url: req.url
-      }) 
+      })
      const allowed = {
          client: req.method === 'GET' && req.path === '/vacations/' && req.query.client === 'client',
          register: req.method === 'POST' && req.path === '/register',
