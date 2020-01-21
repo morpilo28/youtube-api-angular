@@ -43,9 +43,9 @@ export class UsersService {
     const objToAdd: ViewingHistoryModel = { userId: userId, videoId: videoId };
     return this.httpClient.post<ViewingHistoryModel>(`${environment.serverUri}/watch-history`, objToAdd);
   }
-/* 
-  getTop5VideosId(userId): Observable<any> {
+
+  getTop5VideosId(userId: number): Observable<any> {
     return this.httpClient.get<any>(`${environment.serverUri}/top5Videos/${userId}`);
-  } */
+  }
 
 }

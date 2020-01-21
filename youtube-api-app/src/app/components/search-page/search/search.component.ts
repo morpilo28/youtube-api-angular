@@ -9,7 +9,7 @@ import { YouTubeItem } from 'src/app/models/you-tube-list';
 })
 export class SearchComponent implements OnInit {
   private timeOut: number;
-  @Output() playlist: EventEmitter<YouTubeItem[]> = new EventEmitter<YouTubeItem[]>();
+  @Output() playlistFromSearch: EventEmitter<YouTubeItem[]> = new EventEmitter<YouTubeItem[]>();
   constructor(private youTubeService: YouTubeService) { }
 
   ngOnInit() {
@@ -19,8 +19,10 @@ export class SearchComponent implements OnInit {
     clearTimeout(this.timeOut);
     this.timeOut = window.setTimeout(() => {
       this.youTubeService.getVideosForPlaylist(searchValue).subscribe((res) => {
-        this.playlist.emit(res.items);
-      })
+        this.playlistFromSearch.emit(res.items);
+      },
+        err => console.log(err)
+      )
     }, 1.5 * 1000);
   }
 }

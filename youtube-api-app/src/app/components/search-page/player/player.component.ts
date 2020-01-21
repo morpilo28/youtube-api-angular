@@ -12,16 +12,18 @@ export class PlayerComponent implements OnInit {
   private url: SafeResourceUrl;
   @Input() playlist: YouTubeItem[];
   @Input()
+
   get videoId(): string {
     return this._videoId;
   }
+
   set videoId(videoId: string) {
     this._videoId = videoId;
     this.url = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + this.videoId);
   }
+
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-  
   }
 }

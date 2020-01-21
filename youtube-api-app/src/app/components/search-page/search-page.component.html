@@ -3,8 +3,9 @@
 </aside>
 
 <div class="search">
-    <app-search (playlist)="onSearchGetPlaylist($event)"></app-search>
+    <app-search (playlistFromSearch)="onSearchGetPlaylist($event)"></app-search>
 </div>
+
 <main class="player">
     <app-player [videoId]='videoId' [playlist]='playlist'></app-player>
 </main>

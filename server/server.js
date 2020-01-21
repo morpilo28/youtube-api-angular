@@ -67,42 +67,21 @@ app.post('/watch-history', function (req, res) {
     })
 });
 
-app.listen(process.env.PORT || PORT, () =>
-    console.log(`Example app listening on port ${process.env.PORT || PORT}!`),
-);
-
-
-
-/* 
-
-
-
 app.get('/top5Videos/:id', function (req, res) {
     const userId = req.params.id;
-    usersBl.getUserTop5Videos(userId, (e, d) => {
+    usersBl.getUserTop5Videos(userId, (e, videosIdStr) => {
         if (e) {
             res.status(500).send(e);
         } else {
-            let videosIdStr = '';
-            for(let i = 0;i<d.length;i++){
-                videosIdStr+= `${d[i].videoId},`;
-            }
-            res.send({videosIdStr:videosIdStr});
+         
+            res.send({top5VideosId:videosIdStr});
         }
     })
 })
 
-*/
-
-
-
-
-
-
-
-
-
-
+app.listen(process.env.PORT || PORT, () =>
+    console.log(`Example app listening on port ${process.env.PORT || PORT}!`),
+);
 
 
 /*

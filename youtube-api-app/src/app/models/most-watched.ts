@@ -61,7 +61,7 @@ export interface YouTubeSnippet {
     defaultAudioLanguage: string;
 }
 
-export interface top5YouTubeItem {
+export interface Top5YouTubeItem {
     kind: string;
     etag: string;
     id: string;
@@ -72,6 +72,6 @@ export interface MostWatchedModel {
     kind: string;
     etag: string;
     pageInfo: YouTubePageInfo;
-    items: top5YouTubeItem[];
+    items: Top5YouTubeItem[];
 }
 

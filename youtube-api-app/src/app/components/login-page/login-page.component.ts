@@ -26,7 +26,6 @@ export class LoginPageComponent implements OnInit {
         this.setAndRoute(userLogged, true, '/youtube-search');
       },
       err => {
-        console.log(err);
         this.note = `user not found`;
         this.user.userName = '';
         this.user.password = '';

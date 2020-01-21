@@ -1,4 +1,4 @@
-<div [title]='video.snippet.description' (click)='onPickedVideo(video.id.videoId)'>
+<div [title]='video.snippet.description' (click)='onPickedVideo(video.id.videoId ? video.id.videoId : video.id)'>
     <h3>{{video.snippet.title}}</h3>
     <img [src]="video.snippet.thumbnails.default.url" />
 </div>

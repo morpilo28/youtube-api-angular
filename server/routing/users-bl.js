@@ -1,5 +1,3 @@
-//TODO: make all strings to lower case;
-
 const dal = require('../dal');
 const watchHistoryTable = 'watch_history';
 const userTable = 'user';
@@ -72,7 +70,6 @@ function getUsers(callback) {
 }
 
 function addToWatchList(objToAdd, callback) {
-    console.log(objToAdd);
     dal.createOne(`insert into ${watchHistoryTable} (userId, videoId) values (${objToAdd.userId}, '${objToAdd.videoId}');`, `select * from ${watchHistoryTable} where id = (select max(id) from ${watchHistoryTable})`, (e, data) => {
         if (e) {
             callback(e);
@@ -82,27 +79,21 @@ function addToWatchList(objToAdd, callback) {
     })
 }
 
-/* function getUserTop5Videos(userId, callback) {
+function getUserTop5Videos(userId, callback) {
     userId = Number(userId);
-    dal.readAll(`select videoId, count(videoId) as videoId_occurrence from ${watchHistoryTable} where userId = ${userId} group by videoId order by videoId_occurrence desc limit 5;`,(e,d)=>{
+    dal.readAll(`select videoId, count(videoId) as videoId_occurrence from ${watchHistoryTable} where userId = ${userId} group by videoId order by videoId_occurrence desc limit 5;`,(e,top5Videos)=>{
         if(e){
             callback(e);
         }else{
-            callback(null,d);
+            let videosIdStr = '';
+            for(let i = 0;i<top5Videos.length;i++){
+                videosIdStr+= `${top5Videos[i].videoId},`;
+            }
+            videosIdStr = videosIdStr.slice(0, -1);
+            callback(null,videosIdStr);
         }
     })
-} */
-
-/* 
-select videoId,
-count(videoId) as videoId_occurrence 
-from watch_history
-where userId = 4
-group by videoId 
-order by videoId_occurrence desc 
-limit 5
-
-*/
+}
 
 module.exports = {
     getUsers: getUsers,
@@ -110,5 +101,5 @@ module.exports = {
     validateUser: validateUser,
     isUserNameAlreadyExist: isUserNameAlreadyExist,
     addToWatchList: addToWatchList,
-    /* getUserTop5Videos: getUserTop5Videos */
+    getUserTop5Videos: getUserTop5Videos
 }

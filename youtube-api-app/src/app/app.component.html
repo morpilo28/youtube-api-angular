@@ -1,6 +1,10 @@
-<a [routerLink]="['/']">Home | </a>
-<a [routerLink]="['/register']">Register | </a>
-<a [routerLink]="['/login']">Login | </a>
-<a [routerLink]="['/login']" (click)='onLogout()'>Logout</a>
+<nav id='navBar'>
+    <a [routerLink]="['/']">Home | </a>
+    <a [routerLink]="['/register']">Register | </a>
+    <a [routerLink]="['/login']">Login | </a>
+    <!--TODO: make 'youtube search' link visible only if user is connected -->
+    <!-- <a [routerLink]="['/youtube-search']" id='membersArea' class="notForMembersOnly">youTube Search | </a> -->
+    <a [routerLink]="['/login']" (click)='onLogout()'>Logout</a>
+</nav>
 <br><br>
 <router-outlet></router-outlet>
