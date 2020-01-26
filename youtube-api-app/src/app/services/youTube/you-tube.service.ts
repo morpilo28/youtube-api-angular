@@ -15,7 +15,7 @@ export class YouTubeService {
   }
 
   getVideosForPlaylist(query): Observable<YouTubeListModel> {
-    const youTubeUrl = new YouTubeUrlBuilder(environment.apiKey, environment.youTubeBaseUrl);
+    const youTubeUrl = new YouTubeUrlBuilder(environment.apiKey, environment.youTubeBaseUrl+'/search');
     youTubeUrl.addPart('snippet');
     youTubeUrl.addQueryForSearch(query);
     youTubeUrl.addType('video');
@@ -29,7 +29,7 @@ export class YouTubeService {
 
   getTop5WatchedVideosByUser(videosId: string): Observable<MostWatchedModel> {
     //https://www.googleapis.com/youtube/v3/videos?part=snippet&id=Ks-_Mh1QhMc%2Cc0KYU2j0TM4%2CeIho2S0ZahI&key=[YOUR_API_KEY];
-    const youTubeUrl = new YouTubeUrlBuilder(environment.apiKey, environment.UserMostWatchedVideosBaseUrl);
+    const youTubeUrl = new YouTubeUrlBuilder(environment.apiKey, environment.youTubeBaseUrl+'/videos');
     youTubeUrl.addPart('snippet');
     youTubeUrl.addVideosId(videosId);
 

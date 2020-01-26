@@ -24,13 +24,14 @@ export class LoginPageComponent implements OnInit {
       userLogged => {
         window.localStorage.setItem('user', JSON.stringify(userLogged));
         this.setAndRoute(userLogged, true, '/youtube-search');
+        console.log(userLogged.token);
       },
       err => {
         this.note = `user not found`;
         this.user.userName = '';
         this.user.password = '';
         window.localStorage.clear();
-        this.setAndRoute({ userId: null, userName: '', password: '' }, false, '/login');
+        this.setAndRoute({ userId: null, userIp: '', token: '' }, false, '/login');
       });
   }
 

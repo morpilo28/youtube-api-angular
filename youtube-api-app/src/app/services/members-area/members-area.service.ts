@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserModel } from "../../models/userModel";
-import { Observable, of } from "rxjs";
-import { UsersService } from "../users/users.service";
+import { UserModelFromService } from 'src/app/models/user-model-from-service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +8,9 @@ import { UsersService } from "../users/users.service";
 export class MembersAreaService {
   private isUserLogged: boolean;
   private allUsers: UserModel[] = [];
-  private currentUser: UserModel = { userId: null, userName: '', password: '' };
+  private currentUser: UserModelFromService = { userId: null, userName: '', token:'' };
 
-  constructor(private usersService: UsersService) {
+  constructor() {
     this.isUserLogged = false;
   }
   
@@ -26,7 +25,7 @@ export class MembersAreaService {
     this.currentUser = currentUser;
   }
 
-  getCurrentUser(): UserModel {
+  getCurrentUser(): UserModelFromService {
     return this.currentUser;
   }
 }

@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { UserModel } from "../../models/userModel";
 import { ViewingHistoryModel } from "../../models/viewing-history-model";
+import { UserModelFromService } from 'src/app/models/user-model-from-service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,8 @@ export class UsersService {
     return this.httpClient.post<UserModel>(`${environment.serverUri}/register`, userToAdd);
   }
 
-  userLoginValidation(user: UserModel): Observable<UserModel> {
-    return this.httpClient.post<UserModel>(`${environment.serverUri}/login`, user);
+  userLoginValidation(user: UserModel): Observable<UserModelFromService> {
+    return this.httpClient.post<UserModelFromService>(`${environment.serverUri}/login`, user);
   }
 
   getSingleUser(id): UserModel {
