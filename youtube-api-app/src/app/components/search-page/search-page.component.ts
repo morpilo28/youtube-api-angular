@@ -12,7 +12,7 @@ import { Top5YouTubeItem } from 'src/app/models/most-watched';
   styleUrls: ['./search-page.component.css']
 })
 export class SearchPageComponent implements OnInit {
-  private playlist = []; // TODO: how to set variable to be one of two types. for example: Top5YouTubeItem[] || YouTubeItem[]
+  private playlist = []; // TODO: set variable to be one of two types. for example: Top5YouTubeItem[] || YouTubeItem[]
   private videoId: string;
   private currentUser: UserModel;
 
